@@ -233,15 +233,20 @@ class CycleGAN():
 
         ''' Training Function '''
 
-
         # Load Dataset from the dataset folder
+        print("LOAD DATASET...")
         self.input_setup()  
+        print("DONE")
 
         #Build the network
+        print("LOAD MODEL...")
         self.model_setup()
+        print("DONE")
 
         #Loss function calculations
+        print("CALCULATE LOSS...")
         self.loss_calc()
+        print("DONE")
       
         # Initializing the global variables
         init = tf.global_variables_initializer()
@@ -349,12 +354,13 @@ class CycleGAN():
                 imsave("./output/imgs/test/inputB_"+str(i)+".jpg",((self.B_input[i][0]+1)*127.5).astype(np.uint8))
 
 
-def main():
+def main(train=to_train,test=to_test):
     
     model = CycleGAN()
-    if to_train:
+    print(train,test)
+    if train:
         model.train()
-    elif to_test:
+    elif test:
         model.test()
 
 if __name__ == '__main__':
